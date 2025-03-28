@@ -33,7 +33,7 @@ class RM_controller:
             if len(tech_state) == 6 :  # 6D pose
                 print("6D pose")
             elif len(tech_state) == 7:  # 7D pose
-                print("7D pose")
+                print("Quaternion pose")
             else:
                 raise ValueError(f"Invalid state length: {len(tech_state)}")
             if self.prev_tech_prev_tech_stateeef == None:
