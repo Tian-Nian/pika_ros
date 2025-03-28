@@ -2,7 +2,7 @@ import rospy
 from geometry_msgs.msg import PoseStamped
 from RealMan import RM_controller
 from Realsense import Img_controller
-from tf.transformations import euler_from_quaternion
+# from tf.transformations import euler_from_quaternion
 from sensor_tools import Gripper
 from data_dual import CollectData
 import argparse
@@ -53,10 +53,12 @@ def pose_callback_right(msg):
         msg.pose.orientation.w
     )
     rospy.loginfo(f"Received pose: x={x}, y={y}, z={z}")
-    roll, pitch, yaw = euler_from_quaternion(quaternion)
+    qx, qy, qz, qw = quaternion
+    # 使用欧拉角表示姿态
+    # roll, pitch, yaw = euler_from_quaternion(quaternion)
     # move robot arm to the received pose
     global right_wrist_controller
-    right_wrist_controller.move([x,y,z,roll, pitch, yaw])
+    right_wrist_controller.move([x,y,z,qx, qy, qz, qw])
     # set right arm as main arm
     collect_once()
 

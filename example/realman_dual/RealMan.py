@@ -30,7 +30,11 @@ class RM_controller:
     def move(self, tech_state):
         try:
             # Validate state length
-            if len(tech_state) != 6:  # 6D pose
+            if len(tech_state) == 6 :  # 6D pose
+                print("6D pose")
+            elif len(tech_state) == 7:  # 7D pose
+                print("7D pose")
+            else:
                 raise ValueError(f"Invalid state length: {len(tech_state)}")
             if self.prev_tech_prev_tech_stateeef == None:
                 print(f"DEBUG: Frist time setting EEF:{tech_state}")
