@@ -1,3 +1,6 @@
+import sys
+sys.path.append("./")
+
 import rospy
 from geometry_msgs.msg import PoseStamped
 from RealMan import RM_controller
