@@ -30,7 +30,7 @@ class RM_controller:
     def move(self, tech_state):
         try:
             # Validate state length
-            if len(tech_state) != 6:  # 6 joints
+            if len(tech_state) != 6:  # 6D pose
                 raise ValueError(f"Invalid state length: {len(tech_state)}")
             if self.prev_tech_prev_tech_stateeef == None:
                 print(f"DEBUG: Frist time setting EEF:{tech_state}")
@@ -40,7 +40,7 @@ class RM_controller:
             print (f"DEBUG: Setting EEF: {state},action:{tech_state}")
             # delta postion, abs angle
             next_state = [state[:3] + (tech_state[:3] - self.prev_tech_state[:3]),tech_state[:-3]]
-            success = self.arm_controller.rm_movej_p(next_state, False, 0, 0, 0)
+            success = self.arm_controller.rm_movep_canfd(next_state, False, 0, 0)
             self.prev_tech_state = tech_state
 
             if success != 0:
